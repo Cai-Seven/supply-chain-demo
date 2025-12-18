@@ -1,26 +1,19 @@
 {
-  "name": "supply-chain-demo",
+  "name": "vuln-demo",
   "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cai1006652859/supply-chain-demo.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/cai1006652859/supply-chain-demo/issues"
-  },
-  "homepage": "https://github.com/cai1006652859/supply-chain-demo#readme",
   "dependencies": {
-    "express": "^5.2.1",
-    "jquery-confirm": "^3.3.4",
-    "jws": "4.0.1"
+    "debug": "2.6.8",
+    "express": "4.16.0",
+    "handlebars": "4.1.2",
+    "hoek": "4.2.0",
+    "jws": "^3.2.2",
+    "lodash": "4.17.11",
+    "minimist": "0.0.8",
+    "mongoose": "5.7.0",
+    "request": "2.88.0"
   }
 }
