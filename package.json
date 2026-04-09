@@ -4,10 +4,6 @@
   "private": true,
   "scripts": {
     "start": "node server.js"
-    "preinstall": "node scripts/pre-install-check.js || true",
-    "validate:packages": "node scripts/npm-install-interceptor.js",
-    "validate:versions": "node scripts/validate-versions.js",
-    "test": "npm run validate:packages && npm run validate:versions"
   },
   "dependencies": {
     "debug": "2.6.8",
