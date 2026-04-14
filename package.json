@@ -6,10 +6,9 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "openmemory-mcp-vista8": "^1.0.1",
-    "fr3kc0de": "~1.0.10",
-    "@dynamicpixels/typescript": "~0.9.0",
-    "raptor-ts": "^1.0.3",
-    "@unikue/ts-lang-utils": "1.0.0"
+    "next": "^16.2.3",
+    "@ax-llm/ax-tools": "~19.0.44",
+    "@ax-llm/ax": "^19.0.44",
+    "@griddo/ax": "11.12.0",
   }
 }
