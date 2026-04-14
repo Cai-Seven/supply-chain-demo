@@ -25,41 +25,33 @@ jobs:
           max_age_days: "14"
           registry_url: "https://registry.npmjs.org"
 
-      # 这里放你真正的打包命令（示例）
       - name: Show installed versions (from node_modules)
         shell: bash
         run: |
           set -e
-      
+
           echo "=== Top-level deps (npm ls --depth=0) ==="
           npm ls --depth=0 || true
-      
+
           echo ""
           echo "=== Versions from node_modules (direct read) ==="
           node - <<'NODE'
           const fs = require('fs');
           const path = require('path');
-      
-          const pkgs = [
-            "express",
-            "lodash",
-            "debug",
-            "handlebars",
-            "mongoose",
-            "jws",
-            "hoek",
-            "minimist",
-            "request"
-          ];
-      
-          for (const name of pkgs) {
-            const p = path.join("node_modules", name, "package.json");
+
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const deps = Object.assign({}, pkg.dependencies || {}, pkg.devDependencies || {});
+
+          const names = Object.keys(deps).sort((a, b) => a.localeCompare(b));
+
+          for (const name of names) {
+            const p = path.join('node_modules', name, 'package.json');
             if (!fs.existsSync(p)) {
-              console.log(`${name}: (not installed)`);
+              console.log(`${name}: (not installed) (requested: ${deps[name]})`);
               continue;
             }
-            const j = JSON.parse(fs.readFileSync(p, "utf8"));
-            console.log(`${name}: ${j.version}`);
+            const j = JSON.parse(fs.readFileSync(p, 'utf8'));
+            console.log(`${name}: ${j.version} (requested: ${deps[name]})`);
           }
           NODE
 
