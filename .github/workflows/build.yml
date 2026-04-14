@@ -21,9 +21,6 @@ jobs:
       # 关键：以后你所有 npm install 都用这个 action
       - name: Guarded npm install
         uses: Cai-Seven/reference-security-defenses/.github/actions/npm-guard-install@main
-        with:
-          max_age_days: "14"
-          registry_url: "https://registry.npmjs.org"
 
       - name: Show installed versions (from node_modules)
         shell: bash
