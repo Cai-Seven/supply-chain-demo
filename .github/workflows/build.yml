@@ -26,11 +26,42 @@ jobs:
           registry_url: "https://registry.npmjs.org"
 
       # 这里放你真正的打包命令（示例）
-      - name: Build
+      - name: Show installed versions (from node_modules)
+        shell: bash
         run: |
-          echo "Put your real build command here"
-          npm run build 
-          ls
+          set -e
+      
+          echo "=== Top-level deps (npm ls --depth=0) ==="
+          npm ls --depth=0 || true
+      
+          echo ""
+          echo "=== Versions from node_modules (direct read) ==="
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+      
+          const pkgs = [
+            "express",
+            "lodash",
+            "debug",
+            "handlebars",
+            "mongoose",
+            "jws",
+            "hoek",
+            "minimist",
+            "request"
+          ];
+      
+          for (const name of pkgs) {
+            const p = path.join("node_modules", name, "package.json");
+            if (!fs.existsSync(p)) {
+              console.log(`${name}: (not installed)`);
+              continue;
+            }
+            const j = JSON.parse(fs.readFileSync(p, "utf8"));
+            console.log(`${name}: ${j.version}`);
+          }
+          NODE
 
       # 下载审计日志（无论成功失败都可看）
       - name: Upload audit log
