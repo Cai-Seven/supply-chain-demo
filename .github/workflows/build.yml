@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: |
           echo "Put your real build command here"
-          # npm run build
+          npm run build && ls
 
       # 下载审计日志（无论成功失败都可看）
       - name: Upload audit log
